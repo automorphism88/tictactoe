@@ -13,24 +13,25 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include<inttypes.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include "cli.h"
 #include "tictactoe.h"
 
-static inline void display_square(const int* board,int pos);
-static int one_legal_move(const int* board);
-static inline void print_evaluation(int evaluation);
-extern inline void print_result(int result);
-static int valid_move(const int* board,int move);
+static inline void display_square(const int_fast8_t* board,int_fast8_t pos);
+static int_fast8_t one_legal_move(const int_fast8_t* board);
+static inline void print_evaluation(int_fast8_t evaluation);
+extern inline void print_result(int_fast8_t result);
+static int_fast8_t valid_move(const int_fast8_t* board,int_fast8_t move);
 
-void display_board(const int* board) {
+void display_board(const int_fast8_t* board) {
     static const char* begin_row="|     |     |     |\n|  ";
     static const char* end_row="  |\n|     |     |     |\n";
     static const char* new_column="  |  ";
     static const char* new_row="-------------------\n";
-    int i;
+    int_fast8_t i;
     for (i=0;i<3;i++) {
         printf("%s%s",new_row,begin_row);
         display_square(board,3*i+0);
@@ -43,46 +44,46 @@ void display_board(const int* board) {
     printf("%s",new_row);
 }
 
-void display_evaluations(const int* board,int side) {
+void display_evaluations(const int_fast8_t* board,int_fast8_t side) {
     static const char* header=" Move | Evaluation (1 move = 2 plies)\n";
     static const char* divider="-------------------------------------\n";
     leaf_nodes_evaluated=0;
-    int values[9];
-    int* temp_board=malloc(9*sizeof(int));
+    int_fast8_t values[9];
+    int_fast8_t* temp_board=malloc(9*sizeof(int_fast8_t));
     if (temp_board == NULL) {
         fprintf(stderr,"Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
-    int i;
+    int_fast8_t i;
     for (i=0;i<9;i++) {
         if (board[i] == 0) {
-            memcpy(temp_board,board,9*sizeof(int));
+            memcpy(temp_board,board,9*sizeof(int_fast8_t));
             temp_board[i]=side;
             values[i]=evaluate_node(temp_board,side,0,-100,100);
         }
     }
     free(temp_board);
-    printf("Evaluated %d leaf node(s)\n%s%s%s",
+    printf("Evaluated %"PRIdFAST32" leaf node(s)\n%s%s%s",
            leaf_nodes_evaluated,divider,header,divider);
     for (i=0;i<9;i++) {
         if (board[i] == 0) {
-            printf("   %d  | ",i+1);
+            printf("   %"PRIdFAST8"  | ",i+1);
             print_evaluation(values[i]);
         }
     }
     printf("%s",divider);
 }
 
-static inline void display_square(const int* board,int pos) {
+static inline void display_square(const int_fast8_t* board,int_fast8_t pos) {
     if (board[pos] == 0)
-        printf("%d",pos+1);
+        printf("%"PRIdFAST8,pos+1);
     else if (board[pos] == 1)
         printf("X");
     else if (board[pos] == 2)
         printf("O");
 }
 
-int get_choice(const char* prompt) {
+int_fast8_t get_choice(const char* prompt) {
     char choice='\0';
     int c;
     while ((choice != 'Y')&&(choice != 'y')&&
@@ -100,13 +101,13 @@ int get_choice(const char* prompt) {
         return 0;
 }
 
-int get_num_players() {
+int_fast8_t get_num_players() {
     static const char* prompt="Number of players? ";
     int c;
-    int ret=-1;
+    int_fast8_t ret=-1;
     while ((ret < 0)||(ret > 2)) {
         printf("%s",prompt);
-        while (scanf("%d",&ret) != 1) {
+        while (scanf("%"SCNdFAST8,&ret) != 1) {
             printf("Input is not a valid number\n");
             while (((c=getchar()) != EOF) && (c != '\n'));
             printf("%s",prompt);
@@ -119,10 +120,10 @@ int get_num_players() {
 
 /*Check if there is only one open square on the board. If so,
   return that square (1-9). Else, return 0.*/
-static int one_legal_move(const int* board) {
-    int num_free=0;
-    int last_free=-1;
-    int i;
+static int_fast8_t one_legal_move(const int_fast8_t* board) {
+    int_fast8_t num_free=0;
+    int_fast8_t last_free=-1;
+    int_fast8_t i;
     for (i=0;i<9;i++) {
         if (board[i] == 0) {
             num_free++;
@@ -130,39 +131,39 @@ static int one_legal_move(const int* board) {
         }
     }
     if (num_free == 1) {
-        printf("You must play %d since it is the only empty square\n",
+        printf("You must play %"PRIdFAST8" since it is the only empty square\n",
                last_free+1);
         return last_free+1;
     } else
         return 0;
 }
 
-void player_move(int* board,int side) {
-    int choice = one_legal_move(board);
+void player_move(int_fast8_t* board,int_fast8_t side) {
+    int_fast8_t choice = one_legal_move(board);
     int c;
     if (choice == 0) {
         do {
-            printf("Enter a move for player %d: ",side);
-            while (scanf("%d",&choice) != 1) {
+            printf("Enter a move for player %"PRIdFAST8": ",side);
+            while (scanf("%"SCNdFAST8,&choice) != 1) {
                 printf("Input is not a valid number\n");
                 while (((c=getchar()) != EOF) && (c != '\n'));
-                printf("Enter a move for player %d: ",side);
+                printf("Enter a move for player %"PRIdFAST8": ",side);
             }
         } while (!valid_move(board,choice));
     }
     play_move(board,side,choice-1);
 }
 
-static inline void print_evaluation(int evaluation) {
+static inline void print_evaluation(int_fast8_t evaluation) {
     if (evaluation == 0)
         printf("Draw\n");
     else if (evaluation < 0)
-        printf("Loses in %d move(s)\n",(evaluation+11)/2);
+        printf("Loses in %"PRIdFAST8" move(s)\n",(evaluation+11)/2);
     else
-        printf("Wins in %d move(s)\n",(12-evaluation)/2);
+        printf("Wins in %"PRIdFAST8" move(s)\n",(12-evaluation)/2);
 }
 
-static int valid_move(const int* board,int move) {
+static int_fast8_t valid_move(const int_fast8_t* board,int_fast8_t move) {
     if ((move < 1)||(move > 9)) {
         printf("Invalid move!  Please select a number from 1 to 9.\n");
         return 0;

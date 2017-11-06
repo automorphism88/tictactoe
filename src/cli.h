@@ -16,12 +16,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef CLI_H_
 #define CLI_H_
 
-void display_board(const int* board);
-void display_evaluations(const int* board,int side);
-int get_choice(const char* prompt);
-int get_num_players();
-void player_move(int* board,int side);
-inline void print_result(int result) {
+void display_board(const int_fast8_t* board);
+void display_evaluations(const int_fast8_t* board,int_fast8_t side);
+int_fast8_t get_choice(const char* prompt);
+int_fast8_t get_num_players();
+void player_move(int_fast8_t* board,int_fast8_t side);
+inline void print_result(int_fast8_t result) {
     if (result == -1)
         printf("Draw!\n");
     else if (result == 1)

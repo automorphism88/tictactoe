@@ -13,6 +13,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include<stdint.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
@@ -21,15 +22,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 int main()
 {
-    int verbose=get_choice("Show computer evaluations [Y/N]?");
     srand(time(NULL));
-    int num_players;
-    int first,turn;
-    int* board;
-    int result;
+    int_fast8_t verbose=get_choice("Show computer evaluations [Y/N]?");
+    int_fast8_t num_players;
+    int_fast8_t first,turn;
+    int_fast8_t* board;
+    int_fast8_t result;
     /*Main loop*/
     do {
-        board=calloc(9,sizeof(int));
+        board=calloc(9,sizeof(int_fast8_t));
         if (board == NULL) {
             fprintf(stderr,"Memory allocation error\n");
             exit(EXIT_FAILURE);

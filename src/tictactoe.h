@@ -16,11 +16,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
-extern int leaf_nodes_evaluated;
+extern int_fast32_t leaf_nodes_evaluated;
 
-void computer_move(int* board,int side);
-int evaluate_node(const int* board,int side,int depth,int alpha,int beta);
-int game_over(const int* board);
-int play_move(int* board,int side,int move);
+void computer_move(int_fast8_t* board,int_fast8_t side);
+int_fast8_t
+evaluate_node(const int_fast8_t* board,int_fast8_t side,int_fast8_t depth,
+              int_fast8_t alpha,int_fast8_t beta);
+int_fast8_t game_over(const int_fast8_t* board);
+int_fast8_t play_move(int_fast8_t* board,int_fast8_t side,int_fast8_t move);
 
 #endif
