@@ -24,7 +24,7 @@ int main()
     int verbose=get_choice("Show computer evaluations [Y/N]?");
     srand(time(NULL));
     int num_players;
-    int turn;
+    int first,turn;
     int* board;
     /*Main loop*/
     do {
@@ -35,51 +35,35 @@ int main()
         }
         num_players = get_num_players();
         if (num_players==1)
-            turn = get_choice("Play first [Y/N]?");
-        else
-            turn = 0;
+            first = get_choice("Play first [Y/N]?");
+        turn = 0;
         /*Play the game*/
         do {
             display_board(board);
+            if (verbose)
+                display_evaluations(board,turn%2+1);
             switch (num_players) {
             case 0:
-                if (turn==0) {
-                    if (verbose)
-                        display_evaluations(board,1);
-                    computer_move(board,1);
-                    turn=1;
-                } else {
-                    if (verbose)
-                        display_evaluations(board,2);
-                    computer_move(board,2);
-                    turn=0;
-                }
+                computer_move(board,turn%2+1);
+                turn++;
                 break;
             case 1:
-                if (turn==0) {
-                    if (verbose)
-                        display_evaluations(board,2);
-                    computer_move(board,2);
-                    turn=1;
+                if (first) {
+                    if (turn%2 == 0)
+                        player_move(board,1);
+                    else
+                        computer_move(board,2);
                 } else {
-                    if (verbose)
-                        display_evaluations(board,1);
-                    player_move(board,1);
-                    turn=0;
+                    if (turn%2 == 0)
+                        computer_move(board,1);
+                    else
+                        player_move(board,2);
                 }
+                turn++;
                 break;
             case 2:
-                if (turn==0) {
-                    if (verbose)
-                        display_evaluations(board,1);
-                    player_move(board,1);
-                    turn=1;
-                } else {
-                    if (verbose)
-                        display_evaluations(board,2);
-                    player_move(board,2);
-                    turn=0;
-                }
+                player_move(board,turn%2+1);
+                turn++;
                 break;
             }
         } while (!game_over(board));
