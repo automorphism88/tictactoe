@@ -1,4 +1,4 @@
-CFLAGS ?= -O3 -pipe -march=native
+CFLAGS ?= -O3 -pipe -march=native -flto
 LDFLAGS ?= -Wl,-O1 -Wl,--as-needed -Wl,-z,now -Wl,-z,relro
 PREFIX ?= /usr/local
 
