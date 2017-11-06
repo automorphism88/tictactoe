@@ -26,6 +26,7 @@ int main()
     int num_players;
     int first,turn;
     int* board;
+    int result;
     /*Main loop*/
     do {
         board=calloc(9,sizeof(int));
@@ -66,8 +67,9 @@ int main()
                 turn++;
                 break;
             }
-        } while (!game_over(board));
-        done(board);
+        } while (!(result = game_over(board)));
+        print_result(result);
+        display_board(board);
         free(board);
         if ((num_players == 0) &&
             ((rand() % 100) == 0)) {

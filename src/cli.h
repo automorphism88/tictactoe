@@ -18,9 +18,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 void display_board(const int* board);
 void display_evaluations(const int* board,int side);
-void done(const int* board);
 int get_choice(const char* prompt);
 int get_num_players();
 void player_move(int* board,int side);
+inline void print_result(int result) {
+    if (result == -1)
+        printf("Draw!\n");
+    else if (result == 1)
+        printf("Player 1 wins!\n");
+    else if (result == 2)
+        printf("Player 2 wins!\n");
+}
 
 #endif

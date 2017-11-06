@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 static inline void display_square(const int* board,int pos);
 static int one_legal_move(const int* board);
 static inline void print_evaluation(int evaluation);
+extern inline void print_result(int result);
 static int valid_move(const int* board,int move);
 
 void display_board(const int* board) {
@@ -79,17 +80,6 @@ static inline void display_square(const int* board,int pos) {
         printf("X");
     else if (board[pos] == 2)
         printf("O");
-}
-
-void done(const int* board) {
-    int result=game_over(board);
-    if (result == -1)
-        printf("Draw!\n");
-    else if (result == 1)
-        printf("Player 1 wins!\n");
-    else if (result == 2)
-        printf("Player 2 wins!\n");
-    display_board(board);
 }
 
 int get_choice(const char* prompt) {
