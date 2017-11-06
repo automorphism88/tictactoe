@@ -36,7 +36,7 @@ void computer_move(int* board,int side) {
         if (board[i] == 0) {
             memcpy(temp_board,board,9*sizeof(int));
             temp_board[i]=side;
-            values[i]=evaluate_node(temp_board,side,0);
+            values[i]=evaluate_node(temp_board,side,0,-100,100);
             if (values[i] > max_value)
                 max_value=values[i];
         } else
@@ -75,7 +75,7 @@ void computer_move(int* board,int side) {
 }
 
 /*Recursive function to look ahead until the end of the game*/
-int evaluate_node(const int* board,int side,int depth) {
+int evaluate_node(const int* board,int side,int depth,int alpha,int beta) {
     int eval=game_over(board);
     if (eval == side) {
         leaf_nodes_evaluated++;
@@ -94,23 +94,33 @@ int evaluate_node(const int* board,int side,int depth) {
         }
         /*For each free square, check what happens if we play there*/
         int i;
-        int best=-100;
+        int best;
+        if (depth%2 == 0)
+            best=beta;
+        else
+            best=alpha;
         for (i=0;i<9;i++) {
             if (board[i] == 0) {
                 memcpy(temp_board,board,9*sizeof(int));
                 temp_board[i]=(side+depth)%2+1;
-                value=evaluate_node(temp_board,side,depth+1);
-                if (depth % 2 == 0)
-                    value*=-1;
-                if (value > best)
-                    best=value;
+                value=evaluate_node(temp_board,side,depth+1,alpha,beta);
+                if (depth % 2 == 0) {
+                    if (value < best)
+                        best=value;
+                    if (value < beta)
+                        beta=value;
+                } else {
+                    if (value > best)
+                        best=value;
+                    if (value > alpha)
+                        alpha=value;
+                }
+                if (beta <= alpha)
+                    break;
             }
         }
         free(temp_board);
-        if ((depth%2)==0)
-            return -1*best;
-        else
-            return best;
+        return best;
     }
     else {
         leaf_nodes_evaluated++;
