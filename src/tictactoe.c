@@ -20,8 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 int leaf_nodes_evaluated=0;
 
-static inline int other_side(int side);
-
 void computer_move(int* board,int side) {
     leaf_nodes_evaluated=0;
     int values[9];
@@ -38,7 +36,7 @@ void computer_move(int* board,int side) {
         if (board[i] == 0) {
             memcpy(temp_board,board,9*sizeof(int));
             temp_board[i]=side;
-            values[i]=evaluate_node(temp_board,side,0,side);
+            values[i]=evaluate_node(temp_board,side,0);
             if (values[i] > max_value)
                 max_value=values[i];
         } else
@@ -77,7 +75,7 @@ void computer_move(int* board,int side) {
 }
 
 /*Recursive function to look ahead until the end of the game*/
-int evaluate_node(const int* board,int side,int depth,int turn) {
+int evaluate_node(const int* board,int side,int depth) {
     int eval=game_over(board);
     if (eval == side) {
         leaf_nodes_evaluated++;
@@ -97,13 +95,12 @@ int evaluate_node(const int* board,int side,int depth,int turn) {
         /*For each free square, check what happens if we play there*/
         int i;
         int best=-100;
-        int next_turn=other_side(turn);
         for (i=0;i<9;i++) {
             if (board[i] == 0) {
                 memcpy(temp_board,board,9*sizeof(int));
-                temp_board[i]=next_turn;
-                value=evaluate_node(temp_board,side,depth+1,next_turn);
-                if (side == turn)
+                temp_board[i]=(side+depth)%2+1;
+                value=evaluate_node(temp_board,side,depth+1);
+                if (depth % 2 == 0)
                     value*=-1;
                 if (value > best)
                     best=value;
@@ -160,13 +157,6 @@ int game_over(const int* board) {
         return -1;
     else
         return 0;
-}
-
-static inline int other_side(int side) {
-    if (side==1)
-        return 2;
-    else
-        return 1;
 }
 
 int play_move(int* board,int side,int move) {

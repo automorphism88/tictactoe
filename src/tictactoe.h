@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 extern int leaf_nodes_evaluated;
 
 void computer_move(int* board,int side);
-int evaluate_node(const int* board,int side,int depth,int turn);
+int evaluate_node(const int* board,int side,int depth);
 int game_over(const int* board);
 int play_move(int* board,int side,int move);
 

@@ -58,7 +58,7 @@ void display_evaluations(const int* board,int side) {
         if (board[i] == 0) {
             memcpy(temp_board,board,9*sizeof(int));
             temp_board[i]=side;
-            values[i]=evaluate_node(temp_board,side,0,side);
+            values[i]=evaluate_node(temp_board,side,0);
         }
     }
     free(temp_board);
