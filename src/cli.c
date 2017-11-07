@@ -31,13 +31,13 @@ void display_board(const int_fast8_t* board) {
     static const char* end_row = "  |\n|     |     |     |\n";
     static const char* new_column = "  |  ";
     static const char* new_row = "-------------------\n";
-    int_fast8_t i;
+    int_fast8_t i,j;
     for (i=0;i<3;i++) {
         printf("%s%s",new_row,begin_row);
-        display_square(board,3*i+0);
-        printf("%s",new_column);
-        display_square(board,3*i+1);
-        printf("%s",new_column);
+        for (j=0;j<2;j++) {
+            display_square(board,3*i+j);
+            printf("%s",new_column);
+        }
         display_square(board,3*i+2);
         printf("%s",end_row);
     }
