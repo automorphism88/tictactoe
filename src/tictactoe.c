@@ -19,6 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include<string.h>
 #include "tictactoe.h"
 
+extern inline void malloc_fail_check(const void* ptr);
+
 int_fast32_t leaf_nodes_evaluated=0;
 
 void computer_move(int_fast8_t* board,int_fast8_t side) {
@@ -26,10 +28,7 @@ void computer_move(int_fast8_t* board,int_fast8_t side) {
     int_fast8_t values[9];
     int_fast8_t i;
     int_fast8_t* temp_board=malloc(9*sizeof(int_fast8_t));
-    if (temp_board == NULL) {
-        fprintf(stderr,"Memory allocation error\n");
-        exit(EXIT_FAILURE);
-    }
+    malloc_fail_check(temp_board);
     /*Evaluate each possible move, assigning a value
      of -100 to illegal moves*/
     int_fast8_t max_value=-100;
@@ -91,10 +90,7 @@ evaluate_node(const int_fast8_t* board,int_fast8_t side,int_fast8_t depth,
     else if (eval == 0) {
         int_fast8_t value;
         int_fast8_t* temp_board=malloc(9*sizeof(int_fast8_t));
-        if (temp_board == NULL) {
-            fprintf(stderr,"Memory allocation error\n");
-            exit(EXIT_FAILURE);
-        }
+        malloc_fail_check(temp_board);
         /*For each free square, check what happens if we play there*/
         int_fast8_t i;
         int_fast8_t best;

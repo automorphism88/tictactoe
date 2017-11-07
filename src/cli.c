@@ -50,10 +50,7 @@ void display_evaluations(const int_fast8_t* board,int_fast8_t side) {
     leaf_nodes_evaluated=0;
     int_fast8_t values[9];
     int_fast8_t* temp_board=malloc(9*sizeof(int_fast8_t));
-    if (temp_board == NULL) {
-        fprintf(stderr,"Memory allocation error\n");
-        exit(EXIT_FAILURE);
-    }
+    malloc_fail_check(temp_board);
     int_fast8_t i;
     for (i=0;i<9;i++) {
         if (board[i] == 0) {

@@ -31,10 +31,7 @@ int main()
     /*Main loop*/
     do {
         board=calloc(9,sizeof(int_fast8_t));
-        if (board == NULL) {
-            fprintf(stderr,"Memory allocation error\n");
-            exit(EXIT_FAILURE);
-        }
+        malloc_fail_check(board);
         num_players = get_num_players();
         if (num_players==1)
             first = get_choice("Play first [Y/N]?");
