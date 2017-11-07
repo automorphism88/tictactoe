@@ -22,17 +22,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 int main() {
     srand(time(NULL));
-    int_fast8_t verbose=get_choice("Show computer evaluations [Y/N]?");
+    int_fast8_t verbose = get_choice("Show computer evaluations [Y/N]?");
     int_fast8_t num_players;
     int_fast8_t first,turn;
     int_fast8_t* board;
     int_fast8_t result;
     /*Main loop*/
     do {
-        board=calloc(9,sizeof(int_fast8_t));
+        board = calloc(9,sizeof(int_fast8_t));
         malloc_fail_check(board);
         num_players = get_num_players();
-        if (num_players==1)
+        if (num_players == 1)
             first = get_choice("Play first [Y/N]?");
         turn = 0;
         /*Play the game*/
