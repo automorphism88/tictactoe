@@ -44,7 +44,6 @@ int main()
             switch (num_players) {
             case 0:
                 computer_move(board,turn%2+1);
-                turn++;
                 break;
             case 1:
                 if (first) {
@@ -58,13 +57,12 @@ int main()
                     else
                         player_move(board,2);
                 }
-                turn++;
                 break;
             case 2:
                 player_move(board,turn%2+1);
-                turn++;
                 break;
             }
+            turn++;
         } while (!(result = game_over(board)));
         print_result(result);
         display_board(board);
