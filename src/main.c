@@ -20,8 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "cli.h"
 #include "tictactoe.h"
 
-int main()
-{
+int main() {
     srand(time(NULL));
     int_fast8_t verbose=get_choice("Show computer evaluations [Y/N]?");
     int_fast8_t num_players;
@@ -67,6 +66,7 @@ int main()
         print_result(result);
         display_board(board);
         free(board);
+        /*See https://www.youtube.com/watch?v=NHWjlCaIrQo*/
         if ((num_players == 0) &&
             ((rand() % 100) == 0)) {
             printf("A strange game. The only winning move is not to play.\n");
