@@ -64,7 +64,7 @@ void display_evaluations(const int_fast8_t* board,int_fast8_t side) {
            leaf_nodes_evaluated,divider,header,divider);
     for (i=0;i<9;i++) {
         if (board[i] == 0) {
-            printf("   %"PRIdFAST8"  | ",i+1);
+            printf("    %"PRIdFAST8" | ",i+1);
             print_evaluation(values[i]);
         }
     }
