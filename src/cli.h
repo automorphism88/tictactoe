@@ -16,6 +16,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef CLI_H_
 #define CLI_H_
 
+#include <stdio.h>
+
 void display_board(const int_fast8_t* board);
 void display_evaluations(const int_fast8_t* board,int_fast8_t side);
 int_fast8_t get_choice(const char* prompt);

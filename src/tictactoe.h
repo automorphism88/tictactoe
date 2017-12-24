@@ -16,6 +16,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
+#include <stdio.h>
+#include <stdlib.h>
+
 extern int_fast32_t leaf_nodes_evaluated;
 
 void computer_move(int_fast8_t* board,int_fast8_t side);
