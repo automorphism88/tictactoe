@@ -16,6 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 

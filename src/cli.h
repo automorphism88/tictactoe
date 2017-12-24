@@ -16,6 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef CLI_H_
 #define CLI_H_
 
+#include <stdint.h>
 #include <stdio.h>
 
 void display_board(const int_fast8_t* board);
