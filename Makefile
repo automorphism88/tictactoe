@@ -27,4 +27,4 @@ clean:
 	$(RM) tictactoe $(OBJECTS)
 
 install:
-	install tictactoe "$(DESTDIR)/$(PREFIX)/bin/"
+	$(INSTALL) tictactoe "$(DESTDIR)/$(PREFIX)/bin/"
