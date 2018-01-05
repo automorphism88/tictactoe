@@ -87,7 +87,7 @@ int_fast8_t get_choice(const char* prompt) {
            (choice != 'N') && (choice != 'n')) {
         printf("%s ",prompt);
         if (scanf(" %c",&choice) != 1) {
-            printf("Error reading input\n");
+            fprintf(stderr,"Error reading input\n");
             exit(EXIT_FAILURE);
         }
         while (((c=getchar()) != EOF) && (c != '\n'));

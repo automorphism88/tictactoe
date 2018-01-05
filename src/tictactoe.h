@@ -29,7 +29,7 @@ evaluate_node(const int_fast8_t* board,int_fast8_t side,int_fast8_t depth,
 int_fast8_t game_over(const int_fast8_t* board);
 inline void malloc_fail_check(const void* ptr) {
     if (ptr == NULL) {
-        printf("Failed to allocate memory\n");
+        fprintf(stderr,"Failed to allocate memory\n");
         exit(EXIT_FAILURE);
     }
 }
