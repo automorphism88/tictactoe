@@ -4,10 +4,10 @@ human players, with the computer using a
 [minimax](https://en.wikipedia.org/wiki/Minimax) search with
 [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
 for the remaining player(s). The search depth is unlimited, so the computer will
-always play perfectly. Where two or moves have an equal evaluation, the computer
-will select randomly, with equal probability of choosing each move, except on
-the first move, when the computer will choose between playing in the center,
-corner, or edge with probability 1/3 of each, so that the probability of
+always play perfectly. Where two or more moves have an equal evaluation, the
+computer will select randomly, with equal probability of choosing each move,
+except on the first move, when the computer will choose between playing in the
+center, corner, or edge with probability 1/3 of each, so that the probability of
 choosing a given specific non-center square is 1/12.
 
 ## Instructions
