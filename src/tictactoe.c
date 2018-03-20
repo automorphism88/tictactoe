@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 extern inline void malloc_fail_check(const void* ptr);
 
-int_fast32_t leaf_nodes_evaluated = 0;
+int_fast16_t leaf_nodes_evaluated = 0;
 
 void computer_move(int_fast8_t* board,int_fast8_t side) {
     leaf_nodes_evaluated = 0;

@@ -60,7 +60,7 @@ void display_evaluations(const int_fast8_t* board,int_fast8_t side) {
         }
     }
     free(temp_board);
-    printf("Evaluated %"PRIdFAST32" leaf node(s)\n%s%s%s",
+    printf("Evaluated %"PRIdFAST16" leaf node(s)\n%s%s%s",
            leaf_nodes_evaluated,divider,header,divider);
     for (i=0;i<9;i++) {
         if (board[i] == 0) {
