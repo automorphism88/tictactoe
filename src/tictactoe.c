@@ -134,24 +134,24 @@ int_fast8_t game_over(const int_fast8_t* board) {
     for (i=1;i<3;i++) {
         /*Check if either player has won by a horizontal*/
         for (j=0;j<3;j++)
-            if ((board[3*j] == i)&&
-                (board[3*j+1] == i)&&
+            if ((board[3*j] == i) &&
+                (board[3*j+1] == i) &&
                 (board[3*j+2] == i))
                 return i;
         /*Check if either player has won by a vertical*/
         for (j=0;j<3;j++)
-            if ((board[j] == i)&&
-                (board[j+3] == i)&&
+            if ((board[j] == i) &&
+                (board[j+3] == i) &&
                 (board[j+6] == i))
                 return i;
         /*Both diagonals include the center square*/
         if (board[4] == i) {
             /*Check if either player has won by the 0-4-8 diagonal*/
-            if ((board[0] == i)&&
+            if ((board[0] == i) &&
                 (board[8] == i))
                 return i;
             /*Check if either player has won by the 6-4-2 diagonal*/
-            if ((board[6] == i)&&
+            if ((board[6] == i) &&
                 (board[2] == i))
                 return i;
         }
